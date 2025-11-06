@@ -34,7 +34,7 @@ export async function PlaceOrderEmptyform(page: Page) {
 
 }
 
-export async function ContactInformation(page: Page) {
+/*export async function ContactInformation(page: Page) {
     
     const firstNameInput = page.locator('input[name="firstName"]')
     await firstNameInput.fill(TestData.firstName)
@@ -43,7 +43,7 @@ export async function ContactInformation(page: Page) {
     const emailInput=  page.locator('input[name="email"]')
     await emailInput.fill(TestData.email)
 
-}
+}*/
 
 export async function ShippingAddress(page:Page) {
     const AddressInput =  page.locator('[data-test-id="checkout-address-input"]')
@@ -75,8 +75,10 @@ export async function PlaceOrderBtn(page:Page) {
     
 }
 
-export async function GetTrackOrderID(page:Page) {
-    const OrderWrapper =  page.getByText('Your Order ID is:').locator('..')
-    const OrderID = OrderWrapper.getByRole('paragraph').nth(1).textContent()
-    return OrderID
+export async function GetTrackOrderID(page: Page) {
+  const OrderWrapper = page.getByText('Your Order ID is:').locator('..')
+  // Await the text content
+  const OrderID = await OrderWrapper.locator('p').nth(1).textContent()
+  return OrderID
 }
+
